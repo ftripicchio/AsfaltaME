@@ -1,0 +1,42 @@
+<resources>
+    <string name="app_name">AsfaltaME</string>
+    <string name="map_key">AIzaSyCuYHwH_F4qzlVLJYDJWIR5FZWS_eN5loA</string>
+
+    <string name="menuOptReportList">Todos los Reclamos</string>
+    <string name="menuOptNewReport">Nuevo Reclamo</string>
+    <string name="menuOptPreferences">Preferencias</string>
+    <string name="menuOptHelp">Ayuda</string>
+    <string name="menuOptAbout">Acerca de</string>
+    <string name="screenDetail">Detalle de Reclamo</string>
+
+    <string name="email">Email</string>
+    <string name="username">Nombre de Usuario</string>
+    <string name="password">Contraseña</string>
+    <string name="loginButton">Ingresar</string>
+    <string name="registerButton">Registrarse</string>
+    <string name="registerText1">No tenés una cuenta?</string>
+    <string name="registerText2"><u>Registrate</u></string>
+    <string name="loginText1">Ya tenés una cuenta?</string>
+    <string name="loginText2"><u>Ingresá</u></string>
+
+    <string name="location">Ubicación</string>
+    <string name="actualLocation">Actual</string>
+    <string name="otherLocation">Otra</string>
+    <string name="reportType">Tipo de Reclamo</string>
+    <string name="description">Descripción</string>
+    <string name="addPicture">Agregar Foto</string>
+    <string name="createReport">Crear Reclamo</string>
+
+    <string-array name="reportTypes">
+        <item>Bache</item>
+        <item>Hundimiento</item>
+        <item>Tapa de alcantarilla hundida</item>
+        <item>Múltiples problemas</item>
+    </string-array>
+
+    <string name="detailMap">Ver en Mapa</string>
+    <string name="supportReport">Apoyar reclamo</string>
+    <string name="alreadyFixed">Ya fue arreglado</string>
+    <string name="title_activity_maps">Map</string>
+
+</resources>

@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:id="@+id/optReportList" android:title="@string/menuOptReportList" android:icon="@drawable/ic_list"/>
+    <item android:id="@+id/optNewReport" android:title="@string/menuOptNewReport" android:icon="@drawable/ic_new"/>
+    <item android:id="@+id/optPreferences" android:title="@string/menuOptPreferences" android:icon="@drawable/ic_settings"/>
+    <item android:id="@+id/optHelp" android:title="@string/menuOptHelp" android:icon="@drawable/ic_help"/>
+    <item android:id="@+id/optAbout" android:title="@string/menuOptAbout" android:icon="@drawable/ic_info"/>
+</menu>
