@@ -8,6 +8,14 @@
     <string name="menuOptAbout">Acerca de</string>
     <string name="screenDetail">Detalle de Reclamo</string>
 
+    <string-array name="reportType">
+        <item>Todos</item>
+        <item>Bache</item>
+        <item>Hundimiento</item>
+        <item>Tapa de alcantarilla hundida</item>
+        <item>Múltiples Problemas</item>
+    </string-array>
+
     <string name="email">Email</string>
     <string name="username">Nombre de Usuario</string>
     <string name="password">Contraseña</string>
