@@ -33,8 +33,12 @@
         <activity android:name=".NewReportActivity"
             android:windowSoftInputMode="stateVisible|adjustPan"/>
         <activity
-            android:name=".MapsActivity"
-            android:label="@string/title_activity_maps" />
+        android:name=".MapsActivity"
+        android:label="@string/title_activity_maps" />
+        <activity
+            android:name=".ImageSourceDialog"
+            android:theme="@android:style/Theme.Material.Light.Dialog.Alert"
+            android:label="@string/dialogTitle"/>
 
         <meta-data
             android:name="com.google.android.geo.API_KEY"
