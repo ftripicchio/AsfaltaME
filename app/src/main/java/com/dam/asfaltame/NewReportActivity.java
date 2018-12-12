@@ -1,16 +1,14 @@
 package com.dam.asfaltame;
 
 import android.Manifest;
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.location.Location;
-import android.net.Uri;
 import android.os.Environment;
 import android.os.Handler;
 import android.os.ResultReceiver;
-import android.provider.MediaStore;
 import android.support.v4.app.ActivityCompat;
-import android.support.v4.content.FileProvider;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -108,7 +106,7 @@ public class NewReportActivity extends AppCompatActivity {
             public void onClick(View v) {
                 if (ActivityCompat.checkSelfPermission(NewReportActivity.this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED
                         && ActivityCompat.checkSelfPermission(NewReportActivity.this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-                    ActivityCompat.requestPermissions(NewReportActivity.this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION},9999);
+                    ActivityCompat.requestPermissions(NewReportActivity.this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION},1);
                     return;
                 } else {
                     mFusedLocationClient.getLastLocation()
@@ -137,22 +135,8 @@ public class NewReportActivity extends AppCompatActivity {
         addPicture.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent cameraIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-                if(cameraIntent.resolveActivity(getPackageManager()) != null){
-                    File photoFile = null;
-                    try {
-                        photoFile = createImageFile();
-                    } catch (IOException ex) {
-                        ex.printStackTrace();
-                    }
-                    if(photoFile != null){
-                        Uri photoURI = FileProvider.getUriForFile(NewReportActivity.this,
-                                "com.example.android.fileprovider",
-                                photoFile);
-                        cameraIntent.putExtra(MediaStore.EXTRA_OUTPUT, photoURI);
-                        startActivityForResult(cameraIntent, 2);
-                    }
-                }
+                Intent dialogIntent = new Intent(NewReportActivity.this, ImageSourceDialog.class);
+                startActivityForResult(dialogIntent,2);
             }
         });
 
@@ -169,19 +153,6 @@ public class NewReportActivity extends AppCompatActivity {
         intent.putExtra("Receiver", mResultReceiver);
         intent.putExtra("Location", location);
         startService(intent);
-    }
-
-    private File createImageFile() throws IOException {
-        String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
-        String imageFileName = "AsfaltaME_" + timeStamp + "_";
-        File dir = getExternalFilesDir(Environment.DIRECTORY_PICTURES);
-        File image = File.createTempFile(
-                imageFileName, /* prefix */
-                ".jpg", /* suffix */
-                dir /* directory */
-        );
-        lastImagePath = image.getAbsolutePath();
-        return image;
     }
 
     private void createReport(){
@@ -245,7 +216,7 @@ public class NewReportActivity extends AppCompatActivity {
             startFetchAddressIntentService(location);
         }
         else if(requestCode == 2 && resultCode == RESULT_OK){
-            imagePaths.add(lastImagePath);
+            imagePaths.add(data.getStringExtra("result"));
             photoGalleryAdapter.notifyItemInserted(imagePaths.size() - 1);
         }
     }
@@ -269,6 +240,30 @@ public class NewReportActivity extends AppCompatActivity {
                         Toast.LENGTH_LONG).show();
             }
             location.setText("Ubicación: " + address);
+        }
+    }
+
+    @SuppressLint("MissingPermission")
+    @Override
+    public void onRequestPermissionsResult(int requestCode, String permissions[], int[] grantResults) {
+        switch (requestCode) {
+            case 1: {
+                // If request is cancelled, the result arrays are empty.
+                if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                    mFusedLocationClient.getLastLocation()
+                            .addOnSuccessListener(NewReportActivity.this, new OnSuccessListener<Location>() {
+                                @Override
+                                public void onSuccess(Location location) {
+                                    if (location != null) {
+                                        startFetchAddressIntentService(location);
+                                        newReport.setLatitud(location.getLatitude());
+                                        newReport.setLongitud(location.getLongitude());
+                                    }
+                                }
+                            });
+                }
+                return;
+            }
         }
     }
 }
