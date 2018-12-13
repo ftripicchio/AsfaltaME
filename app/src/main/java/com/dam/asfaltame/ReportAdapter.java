@@ -1,5 +1,6 @@
 package com.dam.asfaltame;
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,6 +21,7 @@ public class ReportAdapter extends ArrayAdapter<Report> {
         this.ctx = context;
         this.data = objects;
         appRepository = AppRepository.getInstance(context);
+        Log.d("Adapt", objects.toString());
     }
 
     public View getView(int position, View convertView, ViewGroup parent) {

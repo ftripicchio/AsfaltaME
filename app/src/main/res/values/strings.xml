@@ -7,6 +7,21 @@
     <string name="menuOptHelp">Ayuda</string>
     <string name="menuOptAbout">Acerca de</string>
     <string name="screenDetail">Detalle de Reclamo</string>
+    <string name="mapSelectLocation">Seleccionar una ubicación</string>
+    <string name="mapReportDetail">Detalle de Reclamo - Ubicación</string>
+    <string name="mapNearReports">Reclamos Cercanos</string>
+
+    <string-array name="reportType">
+        <item>Todos</item>
+        <item>Bache</item>
+        <item>Hundimiento</item>
+        <item>Tapa de alcantarilla hundida</item>
+        <item>Múltiples Problemas</item>
+    </string-array>
+
+    <string name="dialogTitle">Agregar una foto</string>
+    <string name="dialogGallery">Galería</string>
+    <string name="dialogCamera">Cámara</string>
 
     <string name="email">Email</string>
     <string name="username">Nombre de Usuario</string>
