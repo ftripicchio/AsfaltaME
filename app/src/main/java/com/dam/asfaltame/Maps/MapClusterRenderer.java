@@ -1,7 +1,14 @@
 package com.dam.asfaltame.Maps;
 
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.Canvas;
+import android.graphics.drawable.Drawable;
+import android.support.v4.content.res.ResourcesCompat;
+import android.support.v4.graphics.drawable.DrawableCompat;
+import android.util.Log;
 
+import com.dam.asfaltame.R;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.model.BitmapDescriptor;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
@@ -19,7 +26,17 @@ public class MapClusterRenderer extends DefaultClusterRenderer<MapItem>{
     }
 
     @Override protected void onBeforeClusterItemRendered(MapItem item, MarkerOptions markerOptions) {
-        final BitmapDescriptor markerDescriptor = BitmapDescriptorFactory.fromResource(item.getmIconId());
-        markerOptions.icon(markerDescriptor);
+        Log.d("iconId", ((Integer)item.getmIconId()).toString());
+        markerOptions.icon(vectorToBitmap(item.getmIconId()));
+    }
+
+    private BitmapDescriptor vectorToBitmap( int id) {
+        Drawable vectorDrawable = ResourcesCompat.getDrawable(mContext.getResources(), id, null);
+        Bitmap bitmap = Bitmap.createBitmap(vectorDrawable.getIntrinsicWidth(),
+                vectorDrawable.getIntrinsicHeight(), Bitmap.Config.ARGB_8888);
+        Canvas canvas = new Canvas(bitmap);
+        vectorDrawable.setBounds(0, 0, canvas.getWidth(), canvas.getHeight());
+        vectorDrawable.draw(canvas);
+        return BitmapDescriptorFactory.fromBitmap(bitmap);
     }
 }

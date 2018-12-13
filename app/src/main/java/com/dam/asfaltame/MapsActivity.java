@@ -11,6 +11,7 @@ import android.os.Bundle;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 
 import com.dam.asfaltame.Maps.MapClusterRenderer;
 import com.dam.asfaltame.Maps.MapItem;
@@ -102,6 +103,7 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
                 break;
             case 4: //reclamos cercanos
                 reports = intent.getParcelableArrayListExtra("reports");
+                Log.d("reportes", reports.toString());
                 putMarkers(reports);
                 break;
         }
@@ -149,6 +151,9 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
         mClusterManager.setRenderer(renderer);
 
         for (Report r : reports){
+            Log.d("latitud", ((Double)r.getLatitud()).toString());
+            Log.d("longitud", ((Double)r.getLongitud()).toString());
+            Log.d("tipo", r.getReportType().toString());
             mClusterManager.addItem(new MapItem(r.getLatitud(), r.getLongitud(), markerIcon(r)));
         }
         mClusterManager.cluster();

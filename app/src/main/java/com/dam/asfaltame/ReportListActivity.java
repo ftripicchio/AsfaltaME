@@ -92,13 +92,15 @@ public class ReportListActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 if (switchCompat.isChecked()){
-                    Intent i = new Intent();
+                    Intent i = new Intent(ReportListActivity.this,MapsActivity.class);
                     i.putExtra("mapType",4);
-//                    i.putParcelableArrayListExtra("reports",filteredListReport);
+                    i.putParcelableArrayListExtra("reports",(ArrayList<Report>)filteredListReport);
+                    startActivity(i);
                 }else{
-                    Intent i = new Intent();
+                    Intent i = new Intent(ReportListActivity.this,MapsActivity.class);
                     i.putExtra("mapType",3);
-//                    i.putParcelableArrayListExtra("reports",filteredListReport);
+                    i.putParcelableArrayListExtra("reports",(ArrayList<Report>)filteredListReport);
+                    startActivity(i);
                 }
             }
         });
