@@ -7,18 +7,22 @@ import android.support.v7.widget.Toolbar;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.dam.asfaltame.Modelo.Report;
+
 public class ReportDetailActivity extends AppCompatActivity {
 
     private ImageView icon;
-    private TextView address;
-    private TextView type;
-    private TextView status;
-    private TextView description;
+    private TextView address, type, status, description;
+
+    private Report report;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_report_detail);
+        report = getIntent().getParcelableExtra("report");
+
+
         configureToolbar();
         getViews();
         //lo que sigue se haría luego de buscar el reporte
@@ -34,11 +38,36 @@ public class ReportDetailActivity extends AppCompatActivity {
     }
 
     private void completeViews(){
-        icon.setImageResource(R.drawable.ic_bache);
-        address.setText("Pasaje 13 de Diciembre 2925");
-        type.setText("Bache");
-        status.setText("ACTIVO");
-        description.setText("kjabsjfabslfa aslans akjfbalkjsnla alnflkansflka alfnalksnlka alnalknf alnflkansflkans alsnflkasnf");
+        icon.setImageResource(reportIcon(report));
+        address.setText(report.getAddress());
+        type.setText(report.getReportType().toString());
+        status.setText(report.getStatus().toString());
+        description.setText(report.getDescription());
+    }
+
+    private int reportIcon(Report report){
+        int markerIconId = 0;
+        switch (report.getStatus()){
+            case ACTIVO:
+                switch (report.getReportType()){
+                    case BACHE:
+                        markerIconId = R.drawable.ic_bache;
+                        break;
+                    case MULTIPLE:
+                        markerIconId = R.drawable.ic_multiple;
+                        break;
+                    case HUNDIMIENTO:
+                        markerIconId = R.drawable.ic_hundimiento;
+                        break;
+                    case TAPA_HUNDIDA:
+                        markerIconId = R.drawable.ic_tapa_hundida;
+                }
+                break;
+            case EN_REPARACION:
+                markerIconId = R.drawable.ic_reparacion;
+                break;
+        }
+        return  markerIconId;
     }
 
     private void configureToolbar() {

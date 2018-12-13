@@ -8,6 +8,8 @@
     <string name="menuOptAbout">Acerca de</string>
     <string name="screenDetail">Detalle de Reclamo</string>
     <string name="mapSelectLocation">Seleccionar una ubicación</string>
+    <string name="mapReportDetail">Detalle de Reclamo - Ubicación</string>
+    <string name="mapNearReports">Reclamos Cercanos</string>
 
     <string-array name="reportType">
         <item>Todos</item>

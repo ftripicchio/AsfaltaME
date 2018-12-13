@@ -1,4 +1,4 @@
-package com.dam.asfaltame;
+package com.dam.asfaltame.Maps;
 
 import android.app.IntentService;
 import android.content.Intent;
