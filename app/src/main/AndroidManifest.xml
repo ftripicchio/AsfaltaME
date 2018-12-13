@@ -45,7 +45,7 @@
             android:value="@string/google_maps_key" />
 
         <service
-            android:name=".FetchAddressIntentService"
+            android:name=".Maps.FetchAddressIntentService"
             android:exported="false"></service>
 
         <provider

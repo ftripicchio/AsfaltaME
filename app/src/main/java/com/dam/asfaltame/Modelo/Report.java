@@ -4,13 +4,15 @@ import android.arch.persistence.room.Embedded;
 import android.arch.persistence.room.Entity;
 import android.arch.persistence.room.PrimaryKey;
 import android.arch.persistence.room.TypeConverters;
+import android.os.Parcel;
+import android.os.Parcelable;
 
 import com.google.android.gms.maps.model.LatLng;
 
 import java.util.List;
 
 @Entity
-public class Report {
+public class Report implements Parcelable{
     @PrimaryKey(autoGenerate = true)
     long id;
     String address;
@@ -41,6 +43,19 @@ public class Report {
         this.apoyos = apoyos;
         this.solucionado = solucionado;
         this.propietario = propietario;
+    }
+
+    public Report(Parcel in){
+        id = in.readLong();
+        address = in.readString();
+        latitud = in.readDouble();
+        longitud = in.readDouble();
+        reportType = ReportType.valueOf(in.readString());
+        status = Status.valueOf(in.readString());
+        description = in.readString();
+        pictures = in.readString();
+        apoyos = in.readInt();
+        solucionado = in.readInt();
     }
 
     public long getId() {
@@ -130,4 +145,35 @@ public class Report {
     public void setPropietario(User propietario) {
         this.propietario = propietario;
     }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeLong(id);
+        dest.writeString(address);
+        dest.writeDouble(latitud);
+        dest.writeDouble(longitud);
+        dest.writeString(reportType.toString());
+        dest.writeString(status.toString());
+        dest.writeString(description);
+        dest.writeString(pictures);
+        dest.writeInt(apoyos);
+        dest.writeInt(solucionado);
+    }
+
+    public static final Parcelable.Creator<Report> CREATOR = new Parcelable.Creator<Report>() {
+        public Report createFromParcel(Parcel source) {
+            return new Report(source);
+        }
+        @Override
+        public Report[] newArray(int size) {
+            return new Report[size];
+        }
+    };
 }
+
+
