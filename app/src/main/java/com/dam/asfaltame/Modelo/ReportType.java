@@ -1,3 +1,3 @@
 package com.dam.asfaltame.Modelo;
 
-public enum ReportType {BACHE, TAPA_HUNDIDA, HUNDIMIENTO, MULTIPLE}
+public enum ReportType {TODOS, BACHE, TAPA_HUNDIDA, HUNDIMIENTO, MULTIPLE}
