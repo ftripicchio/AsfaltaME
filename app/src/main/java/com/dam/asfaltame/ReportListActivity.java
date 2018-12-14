@@ -28,10 +28,7 @@ import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.tasks.OnSuccessListener;
 
 import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Iterator;
 import java.util.List;
-import java.util.ListIterator;
 
 public class ReportListActivity extends AppCompatActivity {
 
@@ -64,10 +61,7 @@ public class ReportListActivity extends AppCompatActivity {
         filterType.setAdapter(rp);
         seeMap = findViewById(R.id.list_map_button);
 
-
-
         configureToolbar();
-        //TODO: Traer los reportes de la base de datos y con ese arreglo armar un ReportAdapter, y seteralo como adapter del ListView
         Runnable r = new Runnable() {
             @Override
             public void run() {
