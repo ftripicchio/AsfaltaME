@@ -88,6 +88,17 @@ public class ReportListActivity extends AppCompatActivity {
         Thread t = new Thread(r);
         t.start();
 
+        lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Intent i = new Intent(ReportListActivity.this, ReportDetailActivity.class);
+                i.putExtra("report",(Report) lv.getItemAtPosition(position));
+                Log.d("Clicked", ((Integer)position).toString());
+                Log.d("Report", ((Report) lv.getItemAtPosition(position)).toString());
+//                startActivity(i);
+            }
+        });
+
         seeMap.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
