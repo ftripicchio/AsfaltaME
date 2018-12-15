@@ -89,7 +89,7 @@ public class ReportListActivity extends AppCompatActivity {
                 i.putExtra("report",(Report) lv.getItemAtPosition(position));
                 Log.d("Clicked", ((Integer)position).toString());
                 Log.d("Report", ((Report) lv.getItemAtPosition(position)).toString());
-//                startActivity(i);
+                startActivity(i);
             }
         });
 
