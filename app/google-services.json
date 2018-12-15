@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "212232847866",
+    "firebase_url": "https://asfaltame-18158.firebaseio.com",
+    "project_id": "asfaltame-18158",
+    "storage_bucket": "asfaltame-18158.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:212232847866:android:8c89464cfedf5689",
+        "android_client_info": {
+          "package_name": "com.dam.asfaltame"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "212232847866-omd2obpmrgt2uqvtt6qc70724751vg1n.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.dam.asfaltame",
+            "certificate_hash": "1a707a06cc95b4624cdaf406e54c05316c027dae"
+          }
+        },
+        {
+          "client_id": "212232847866-krr1a4i1bsnfk2qdmg2mtnmp6mdth3la.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAyteCOAZGymS2OY4DL_11kO6LV1lfEUhM"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "212232847866-krr1a4i1bsnfk2qdmg2mtnmp6mdth3la.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

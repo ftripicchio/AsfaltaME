@@ -1,4 +1,4 @@
-package com.dam.asfaltame;
+package com.dam.asfaltame.Activities;
 
 import android.content.Intent;
 import android.support.design.widget.NavigationView;
@@ -10,9 +10,18 @@ import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 
+import com.dam.asfaltame.Model.User;
+import com.dam.asfaltame.R;
+
 public class MainActivity extends AppCompatActivity {
 
     DrawerLayout drawerLayout;
+
+    public static User getActiveUser() {
+        return activeUser;
+    }
+
+    public static User activeUser;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -20,6 +29,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         configureNavigationDrawer();
         configureToolbar();
+        activeUser = new User(1,"cuenta@servidor.com","TestUser","Password");
     }
 
     private void configureToolbar() {

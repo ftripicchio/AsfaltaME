@@ -1,10 +1,9 @@
-package com.dam.asfaltame;
+package com.dam.asfaltame.Activities;
 
 import android.Manifest;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.location.Location;
-import android.os.Handler;
 import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
@@ -12,7 +11,6 @@ import android.os.Bundle;
 import android.support.v7.widget.AppCompatButton;
 import android.support.v7.widget.SwitchCompat;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -21,8 +19,10 @@ import android.widget.ListView;
 import android.widget.Spinner;
 
 import com.dam.asfaltame.Database.AppRepository;
-import com.dam.asfaltame.Modelo.Report;
-import com.dam.asfaltame.Modelo.ReportType;
+import com.dam.asfaltame.Model.Report;
+import com.dam.asfaltame.Model.ReportType;
+import com.dam.asfaltame.R;
+import com.dam.asfaltame.ReportAdapter;
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -84,12 +84,18 @@ public class ReportListActivity extends AppCompatActivity {
 
         lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Intent i = new Intent(ReportListActivity.this, ReportDetailActivity.class);
-                i.putExtra("report",(Report) lv.getItemAtPosition(position));
-                Log.d("Clicked", ((Integer)position).toString());
-                Log.d("Report", ((Report) lv.getItemAtPosition(position)).toString());
-                startActivity(i);
+            public void onItemClick(AdapterView<?> parent, View view, final int position, long id) {
+                Runnable r  = new Runnable() {
+                    @Override
+                    public void run() {
+                        Report r = appRepository.reportDao.getById(((Report) lv.getItemAtPosition(position)).getId()).get(0);
+                        Intent i = new Intent(ReportListActivity.this, ReportDetailActivity.class);
+                        i.putExtra("report", r);
+                        startActivity(i);
+                    }
+                };
+                Thread t = new Thread(r);
+                t.start();
             }
         });
 

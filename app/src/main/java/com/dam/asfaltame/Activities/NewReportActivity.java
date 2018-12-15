@@ -1,4 +1,4 @@
-package com.dam.asfaltame;
+package com.dam.asfaltame.Activities;
 
 import android.Manifest;
 import android.annotation.SuppressLint;
@@ -22,12 +22,14 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.dam.asfaltame.ChangeListenerVariable;
 import com.dam.asfaltame.Database.AppRepository;
+import com.dam.asfaltame.ImageSourceDialog;
 import com.dam.asfaltame.Maps.FetchAddressIntentService;
-import com.dam.asfaltame.Modelo.Report;
-import com.dam.asfaltame.Modelo.ReportType;
-import com.dam.asfaltame.Modelo.Status;
-import com.google.android.gms.common.util.ArrayUtils;
+import com.dam.asfaltame.Model.Report;
+import com.dam.asfaltame.Model.ReportType;
+import com.dam.asfaltame.Model.Status;
+import com.dam.asfaltame.R;
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.tasks.OnSuccessListener;

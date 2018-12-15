@@ -1,4 +1,4 @@
-package com.dam.asfaltame.Modelo;
+package com.dam.asfaltame.Model;
 
 import android.arch.persistence.room.Embedded;
 import android.arch.persistence.room.Entity;

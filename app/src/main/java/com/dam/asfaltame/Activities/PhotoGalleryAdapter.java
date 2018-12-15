@@ -1,7 +1,7 @@
-package com.dam.asfaltame;
+package com.dam.asfaltame.Activities;
 
 import android.content.Context;
-import android.graphics.Bitmap;
+import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -9,8 +9,8 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
+import com.dam.asfaltame.R;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class PhotoGalleryAdapter extends RecyclerView.Adapter<PhotoGalleryAdapter.MyViewHolder> {
@@ -49,11 +49,20 @@ public class PhotoGalleryAdapter extends RecyclerView.Adapter<PhotoGalleryAdapte
 
     @Override
     public void onBindViewHolder(final MyViewHolder holder, final int position) {
-        String path  = pathList.get(position);
+        final String path  = pathList.get(position);
         Glide
                 .with(context)
                 .load(path)
                 .into(holder.riv);
+
+        holder.riv.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(context, ImageViewActivity.class);
+                i.putExtra("path", path);
+                context.startActivity(i);
+            }
+        });
 
     }
 

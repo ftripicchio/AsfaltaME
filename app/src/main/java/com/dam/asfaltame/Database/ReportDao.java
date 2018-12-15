@@ -6,7 +6,7 @@ import android.arch.persistence.room.Insert;
 import android.arch.persistence.room.Query;
 import android.arch.persistence.room.Update;
 
-import com.dam.asfaltame.Modelo.Report;
+import com.dam.asfaltame.Model.Report;
 
 import java.util.List;
 
@@ -14,6 +14,9 @@ import java.util.List;
 public interface ReportDao {
     @Query("SELECT * FROM Report")
     List<Report> getAll();
+
+    @Query("SELECT * FROM Report WHERE id LIKE :id")
+    List<Report> getById(long id);
 
     @Insert
     long insert(Report rep);

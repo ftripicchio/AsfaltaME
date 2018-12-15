@@ -9,8 +9,10 @@
     -->
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.INTERNET" />
-    <uses-feature android:name="android.hardware.camera"/>
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+
+    <uses-feature android:name="android.hardware.camera" />
+
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
 
     <application
@@ -20,25 +22,28 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.Light.NoActionBar">
-        <activity android:name=".MainActivity">
+        <activity android:name=".Activities.MainActivity">
+
+        </activity>
+        <activity android:name=".Activities.LoginRegisterActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".LoginRegisterActivity" />
-        <activity android:name=".ReportListActivity" />
-        <activity android:name=".ReportDetailActivity" />
-        <activity android:name=".NewReportActivity"
-            android:windowSoftInputMode="stateVisible|adjustPan"/>
+        <activity android:name=".Activities.ReportListActivity" />
+        <activity android:name=".Activities.ReportDetailActivity" />
         <activity
-        android:name=".MapsActivity"
-        android:label="@string/title_activity_maps" />
+            android:name=".Activities.NewReportActivity"
+            android:windowSoftInputMode="stateVisible|adjustPan" />
+        <activity
+            android:name=".Activities.MapsActivity"
+            android:label="@string/title_activity_maps" />
         <activity
             android:name=".ImageSourceDialog"
-            android:theme="@android:style/Theme.Material.Light.Dialog.Alert"
-            android:label="@string/dialogTitle"/>
+            android:label="@string/dialogTitle"
+            android:theme="@android:style/Theme.Material.Light.Dialog.Alert" />
 
         <meta-data
             android:name="com.google.android.geo.API_KEY"
@@ -46,7 +51,7 @@
 
         <service
             android:name=".Maps.FetchAddressIntentService"
-            android:exported="false"></service>
+            android:exported="false" />
 
         <provider
             android:name="android.support.v4.content.FileProvider"
@@ -55,8 +60,10 @@
             android:grantUriPermissions="true">
             <meta-data
                 android:name="android.support.FILE_PROVIDER_PATHS"
-                android:resource="@xml/file_paths"></meta-data>
+                android:resource="@xml/file_paths" />
         </provider>
+
+        <activity android:name=".Activities.ImageViewActivity"></activity>
     </application>
 
 </manifest>

@@ -6,8 +6,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import com.dam.asfaltame.Database.AppRepository;
-import com.dam.asfaltame.Modelo.Report;
-import com.dam.asfaltame.Modelo.Status;
+import com.dam.asfaltame.Model.Report;
+import com.dam.asfaltame.Model.Status;
 import java.util.List;
 
 public class ReportAdapter extends ArrayAdapter<Report> {

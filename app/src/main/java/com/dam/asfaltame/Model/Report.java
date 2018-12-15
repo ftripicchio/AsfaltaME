@@ -1,4 +1,4 @@
-package com.dam.asfaltame.Modelo;
+package com.dam.asfaltame.Model;
 
 import android.arch.persistence.room.Embedded;
 import android.arch.persistence.room.Entity;
@@ -6,10 +6,6 @@ import android.arch.persistence.room.PrimaryKey;
 import android.arch.persistence.room.TypeConverters;
 import android.os.Parcel;
 import android.os.Parcelable;
-
-import com.google.android.gms.maps.model.LatLng;
-
-import java.util.List;
 
 @Entity
 public class Report implements Parcelable{

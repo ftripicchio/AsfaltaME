@@ -1,4 +1,4 @@
-package com.dam.asfaltame;
+package com.dam.asfaltame.Activities;
 
 import android.Manifest;
 import android.annotation.SuppressLint;
@@ -15,11 +15,11 @@ import android.support.v4.content.res.ResourcesCompat;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 
 import com.dam.asfaltame.Maps.MapClusterRenderer;
 import com.dam.asfaltame.Maps.MapItem;
-import com.dam.asfaltame.Modelo.Report;
+import com.dam.asfaltame.Model.Report;
+import com.dam.asfaltame.R;
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.maps.CameraUpdate;
@@ -142,7 +142,7 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
             builder.include(marker.getPosition());
         }
         LatLngBounds bounds = builder.build();
-        CameraUpdate cu = CameraUpdateFactory.newLatLngBounds(bounds,10);
+        CameraUpdate cu = CameraUpdateFactory.newLatLngBounds(bounds,200);
         mMap.moveCamera(cu);
     }
 
@@ -158,6 +158,9 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
             mClusterManager.addItem(new MapItem(r.getLatitud(), r.getLongitud(), markerIcon(r)));
         }
         mClusterManager.cluster();
+
+        mMap.moveCamera(CameraUpdateFactory.
+                newLatLngZoom(new LatLng(-31.625236, -60.703291), 12));
 
     }
 

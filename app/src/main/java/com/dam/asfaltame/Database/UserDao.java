@@ -6,7 +6,7 @@ import android.arch.persistence.room.Insert;
 import android.arch.persistence.room.Query;
 import android.arch.persistence.room.Update;
 
-import com.dam.asfaltame.Modelo.User;
+import com.dam.asfaltame.Model.User;
 
 import java.util.List;
 

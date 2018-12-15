@@ -1,4 +1,4 @@
-package com.dam.asfaltame;
+package com.dam.asfaltame.Activities;
 
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
@@ -7,6 +7,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+
+import com.dam.asfaltame.R;
 
 public class LoginRegisterActivity extends AppCompatActivity {
     final int OPTION_LOGIN = 1;
@@ -26,9 +28,17 @@ public class LoginRegisterActivity extends AppCompatActivity {
         setContentView(R.layout.activity_login_register);
         getViews();
 
-        Intent intent = getIntent();
-        Bundle extras = intent.getExtras();
-        option = extras.getInt("LoginRegisterOption");
+        Bundle extras = getIntent().getExtras();
+
+        if(extras!= null){
+            option = extras.getInt("LoginRegisterOption", -1);
+            if(option == -1){
+                option = OPTION_LOGIN;
+            }
+        }else{
+            option = OPTION_LOGIN;
+        }
+
         switch(option){
             case OPTION_LOGIN:
                 loginButton.setText(R.string.loginButton);
