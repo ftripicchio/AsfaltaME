@@ -54,7 +54,7 @@ public class NewReportActivity extends AppCompatActivity {
 
     Report newReport;
     AppRepository appRepository;
-    String address, lastImagePath;
+    String address;
     List<String> imagePaths = new ArrayList<>();
 
     @Override
