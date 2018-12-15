@@ -5,10 +5,8 @@ import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.drawable.Drawable;
 import android.support.v4.content.res.ResourcesCompat;
-import android.support.v4.graphics.drawable.DrawableCompat;
 import android.util.Log;
 
-import com.dam.asfaltame.R;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.model.BitmapDescriptor;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
@@ -26,7 +24,6 @@ public class MapClusterRenderer extends DefaultClusterRenderer<MapItem>{
     }
 
     @Override protected void onBeforeClusterItemRendered(MapItem item, MarkerOptions markerOptions) {
-        Log.d("iconId", ((Integer)item.getmIconId()).toString());
         markerOptions.icon(vectorToBitmap(item.getmIconId()));
     }
 

@@ -5,9 +5,13 @@ import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.graphics.Bitmap;
+import android.graphics.Canvas;
+import android.graphics.drawable.Drawable;
 import android.location.Location;
 import android.support.v4.app.ActivityCompat;
 import android.os.Bundle;
+import android.support.v4.content.res.ResourcesCompat;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -23,6 +27,7 @@ import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.BitmapDescriptor;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.LatLngBounds;
@@ -103,7 +108,6 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
                 break;
             case 4: //reclamos cercanos
                 reports = intent.getParcelableArrayListExtra("reports");
-                Log.d("reportes", reports.toString());
                 putMarkers(reports);
                 break;
         }
@@ -124,7 +128,7 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
     private void putMarker(Report report){
         Marker marker = mMap.addMarker(new MarkerOptions()
                 .position(new LatLng(report.getLatitud(), report.getLongitud()))
-                .icon(BitmapDescriptorFactory.fromResource(markerIcon(report))));
+                .icon(vectorToBitmap(markerIcon(report))));
         mMap.moveCamera(CameraUpdateFactory.
                 newLatLngZoom(marker.getPosition(), 16));
     }
@@ -134,7 +138,7 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
         for (Report r : reports){
             Marker marker = mMap.addMarker(new MarkerOptions()
                     .position(new LatLng(r.getLatitud(), r.getLongitud()))
-                    .icon(BitmapDescriptorFactory.fromResource(markerIcon(r))));
+                    .icon(vectorToBitmap(markerIcon(r))));
             builder.include(marker.getPosition());
         }
         LatLngBounds bounds = builder.build();
@@ -151,9 +155,6 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
         mClusterManager.setRenderer(renderer);
 
         for (Report r : reports){
-            Log.d("latitud", ((Double)r.getLatitud()).toString());
-            Log.d("longitud", ((Double)r.getLongitud()).toString());
-            Log.d("tipo", r.getReportType().toString());
             mClusterManager.addItem(new MapItem(r.getLatitud(), r.getLongitud(), markerIcon(r)));
         }
         mClusterManager.cluster();
@@ -183,6 +184,16 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
                 break;
         }
         return  markerIconId;
+    }
+
+    private BitmapDescriptor vectorToBitmap(int id) {
+        Drawable vectorDrawable = ResourcesCompat.getDrawable(getResources(), id, null);
+        Bitmap bitmap = Bitmap.createBitmap(vectorDrawable.getIntrinsicWidth(),
+                vectorDrawable.getIntrinsicHeight(), Bitmap.Config.ARGB_8888);
+        Canvas canvas = new Canvas(bitmap);
+        vectorDrawable.setBounds(0, 0, canvas.getWidth(), canvas.getHeight());
+        vectorDrawable.draw(canvas);
+        return BitmapDescriptorFactory.fromBitmap(bitmap);
     }
 
     @Override

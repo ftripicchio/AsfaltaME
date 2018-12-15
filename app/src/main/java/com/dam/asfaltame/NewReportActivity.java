@@ -27,11 +27,14 @@ import com.dam.asfaltame.Maps.FetchAddressIntentService;
 import com.dam.asfaltame.Modelo.Report;
 import com.dam.asfaltame.Modelo.ReportType;
 import com.dam.asfaltame.Modelo.Status;
+import com.google.android.gms.common.util.ArrayUtils;
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.tasks.OnSuccessListener;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -120,7 +123,9 @@ public class NewReportActivity extends AppCompatActivity {
             }
         });
 
-        ArrayAdapter<ReportType> reportTypeAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, ReportType.values());
+        List<ReportType> types = new LinkedList<>(Arrays.asList(ReportType.values()));
+        types.remove(ReportType.TODOS);
+        ArrayAdapter<ReportType> reportTypeAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, types);
         reportType.setAdapter(reportTypeAdapter);
 
         photoGalleryAdapter = new PhotoGalleryAdapter(NewReportActivity.this, imagePaths);
