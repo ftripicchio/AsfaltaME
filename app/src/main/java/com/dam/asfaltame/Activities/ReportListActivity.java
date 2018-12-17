@@ -21,6 +21,7 @@ import android.widget.Spinner;
 import com.dam.asfaltame.Database.AppRepository;
 import com.dam.asfaltame.Model.Report;
 import com.dam.asfaltame.Model.ReportType;
+import com.dam.asfaltame.Model.Status;
 import com.dam.asfaltame.R;
 import com.dam.asfaltame.ReportAdapter;
 import com.google.android.gms.location.FusedLocationProviderClient;
@@ -65,7 +66,13 @@ public class ReportListActivity extends AppCompatActivity {
         Runnable r = new Runnable() {
             @Override
             public void run() {
-                listReport = appRepository.reportDao.getAll();
+                List<Report> list = appRepository.reportDao.getAll();
+                listReport = new ArrayList<>();
+                for (Report r : list){
+                    if(r.getStatus() != Status.REPARADO){
+                        listReport.add(r);
+                    }
+                }
                 filteredListReport = new ArrayList<>(listReport);
                 rAdapter = new ReportAdapter(ReportListActivity.this,filteredListReport);
                 runOnUiThread(new Runnable() {

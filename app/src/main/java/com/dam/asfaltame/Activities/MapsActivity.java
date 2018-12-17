@@ -185,6 +185,9 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
             case EN_REPARACION:
                 markerIconId = R.drawable.ic_reparacion_rojo;
                 break;
+            case REPARADO:
+                markerIconId = R.drawable.ic_checked;
+                break;
         }
         return  markerIconId;
     }

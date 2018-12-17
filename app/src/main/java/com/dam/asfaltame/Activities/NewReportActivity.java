@@ -14,6 +14,7 @@ import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -178,6 +179,7 @@ public class NewReportActivity extends AppCompatActivity {
                         location.setText("Ubicación:");
                         imagePaths.clear();
                         photoGalleryAdapter.notifyDataSetChanged();
+                        createEnabled.setVariable(false);
                         newReport = new Report();
                         Toast.makeText(NewReportActivity.this, "Reclamo creado con éxito",
                                 Toast.LENGTH_LONG).show();

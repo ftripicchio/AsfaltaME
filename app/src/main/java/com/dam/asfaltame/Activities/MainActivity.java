@@ -57,17 +57,10 @@ public class MainActivity extends AppCompatActivity {
                         startActivity(i);
                         return true;
                     case R.id.optPreferences:
-                        //test
-                        i = new Intent(MainActivity.this, ReportDetailActivity.class);
-                        startActivity(i);
                         return true;
                     case R.id.optHelp:
                         return true;
                     case R.id.optAbout:
-                        //test
-                        i = new Intent(MainActivity.this, LoginRegisterActivity.class);
-                        i.putExtra("LoginRegisterOption",1);
-                        startActivity(i);
                         return true;
                     default:
                         return false;

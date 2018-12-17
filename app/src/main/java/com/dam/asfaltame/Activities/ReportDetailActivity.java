@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -35,7 +36,7 @@ public class ReportDetailActivity extends AppCompatActivity {
     private AppRepository appRepository;
     private ReportUser reportUser;
 
-    List<String> imagePaths = new ArrayList<>();
+    List<String> imagePaths;
     private Report report;
 
     @Override
@@ -43,7 +44,11 @@ public class ReportDetailActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_report_detail);
         report = getIntent().getParcelableExtra("report");
+
         imagePaths = Arrays.asList(report.getPictures().split(","));
+        if(imagePaths.get(0) == ""){
+            imagePaths = new ArrayList<>();
+        }
         activeUser = MainActivity.getActiveUser();
         appRepository = AppRepository.getInstance(this);
 
@@ -74,6 +79,14 @@ public class ReportDetailActivity extends AppCompatActivity {
         type.setText(report.getReportType().toString());
         status.setText(" - " + report.getStatus().toString());
         description.setText(report.getDescription());
+
+        if(report.getStatus() == Status.REPARADO){
+            addPicture.setEnabled(false);
+            supportReport.setEnabled(false);
+            alreadyFixed.setEnabled(false);
+        }else if(report.getStatus() == Status.EN_REPARACION){
+            supportReport.setEnabled(false);
+        }
     }
 
     public void setListeners(){
@@ -164,6 +177,7 @@ public class ReportDetailActivity extends AppCompatActivity {
                     public void run() {
                         appRepository.reportDao.update(report);
                         Intent i = new Intent();
+                        Log.d("Enviando id", ((Long)report.getId()).toString());
                         i.putExtra("reportId",report.getId());
                         i.setAction("com.dam.asfaltame.EN_REPARACION");
                         sendBroadcast(i);
@@ -201,6 +215,9 @@ public class ReportDetailActivity extends AppCompatActivity {
                 break;
             case EN_REPARACION:
                 markerIconId = R.drawable.ic_reparacion;
+                break;
+            case REPARADO:
+                markerIconId = R.drawable.ic_checked;
                 break;
         }
         return  markerIconId;
@@ -261,7 +278,11 @@ public class ReportDetailActivity extends AppCompatActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data){
         if(requestCode == 1 && resultCode == RESULT_OK){
-            report.setPictures(report.getPictures() + "," + data.getStringExtra("result"));
+            if(imagePaths.size() == 0){
+                report.setPictures(data.getStringExtra("result"));
+            }else{
+                report.setPictures(report.getPictures() + "," + data.getStringExtra("result"));
+            }
             imagePaths = Arrays.asList(report.getPictures().split(","));
             photoGalleryAdapter = new PhotoGalleryAdapter(ReportDetailActivity.this, imagePaths);
             photoGallery.setAdapter(photoGalleryAdapter);
