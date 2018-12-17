@@ -163,6 +163,10 @@ public class ReportDetailActivity extends AppCompatActivity {
                     @Override
                     public void run() {
                         appRepository.reportDao.update(report);
+                        Intent i = new Intent();
+                        i.putExtra("reportId",report.getId());
+                        i.setAction("com.dam.asfaltame.EN_REPARACION");
+                        sendBroadcast(i);
                     }
                 };
                 Thread t = new Thread(r);

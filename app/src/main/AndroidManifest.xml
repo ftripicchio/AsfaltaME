@@ -15,6 +15,10 @@
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
 
+    <meta-data
+        android:name="com.google.firebase.messaging.default_notification_channel_id"
+        android:value="CANAL01"/>
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -64,6 +68,25 @@
         </provider>
 
         <activity android:name=".Activities.ImageViewActivity"></activity>
+
+        <receiver android:name=".AsfaltameBroadcastReceiver" android:enabled="true" android:exported="true">
+            <intent-filter>
+                <action android:name="com.dam.asfaltame.REPARADO"></action>
+                <action android:name="com.dam.asfaltame.EN_REPARACION"></action>
+            </intent-filter>
+        </receiver>
+        <service android:name=".AsfaltameFirebaseInstanceIdService" android:enabled="true" android:exported="true">
+            <intent-filter>
+                <action android:name="com.google.firebase.INSTANCE_ID_EVENT"></action>
+            </intent-filter>
+        </service>
+        <service android:name=".AsfaltameMessagingService" android:enabled="true" android:exported="true">
+            <intent-filter>
+                <action android:name="com.google.firebase.MESSAGING_EVENT"></action>
+            </intent-filter>
+        </service>
     </application>
+
+
 
 </manifest>
