@@ -56,7 +56,7 @@ public class ImageSourceDialog extends Activity {
                     }
                     if(photoFile != null){
                         Uri photoURI = FileProvider.getUriForFile(ImageSourceDialog.this,
-                                "com.example.android.fileprovider",
+                                "com.dam.asfaltame.fileprovider",
                                 photoFile);
                         cameraIntent.putExtra(MediaStore.EXTRA_OUTPUT, photoURI);
                         startActivityForResult(cameraIntent, 1);

@@ -48,7 +48,6 @@
             android:label="@string/dialogTitle"
             android:theme="@android:style/Theme.Material.Light.Dialog.Alert" />
         <activity android:name=".Activities.ImageViewActivity" />
-        <activity android:name=".Activities.ConfigurationActivity" />
 
         <meta-data
             android:name="com.google.android.geo.API_KEY"
@@ -60,7 +59,7 @@
 
         <provider
             android:name="android.support.v4.content.FileProvider"
-            android:authorities="com.example.android.fileprovider"
+            android:authorities="com.dam.asfaltame.fileprovider"
             android:exported="false"
             android:grantUriPermissions="true">
             <meta-data
