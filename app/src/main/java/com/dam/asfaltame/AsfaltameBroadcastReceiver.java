@@ -32,7 +32,6 @@ public class AsfaltameBroadcastReceiver extends BroadcastReceiver {
                 stackBuilder.addNextIntentWithParentStack(reportDetailIntent);
                 PendingIntent reportDetailPendingIntent = stackBuilder.getPendingIntent(0,PendingIntent.FLAG_UPDATE_CURRENT);
 
-                // TODO: Agregar icono
                 Notification notification = new Notification();
                 if (intent.getAction() == "com.dam.asfaltame.REPARADO"){
                     notification = new NotificationCompat.Builder(context,"CANAL01")

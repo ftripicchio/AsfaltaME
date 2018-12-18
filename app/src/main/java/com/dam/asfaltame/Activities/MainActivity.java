@@ -57,8 +57,6 @@ public class MainActivity extends AppCompatActivity {
                         startActivity(i);
                         return true;
                     case R.id.optPreferences:
-                        i = new Intent(MainActivity.this, ConfigurationActivity.class);
-                        startActivity(i);
                         return true;
                     case R.id.optHelp:
                         return true;
