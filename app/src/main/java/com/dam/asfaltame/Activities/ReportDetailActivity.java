@@ -84,7 +84,7 @@ public class ReportDetailActivity extends AppCompatActivity {
             addPicture.setEnabled(false);
             supportReport.setEnabled(false);
             alreadyFixed.setEnabled(false);
-        }else if(report.getStatus() == Status.EN_REPARACION){
+        }else if(report.getStatus() == Status.EN_REVISION){
             supportReport.setEnabled(false);
         }
     }
@@ -137,8 +137,17 @@ public class ReportDetailActivity extends AppCompatActivity {
                     Thread t = new Thread(r);
                     t.start();
                 }
-
                 supportReport.setEnabled(false);
+
+                report.setApoyos(report.getApoyos() + 1);
+                Runnable r = new Runnable() {
+                    @Override
+                    public void run() {
+                        appRepository.reportDao.update(report);
+                    }
+                };
+                Thread t = new Thread(r);
+                t.start();
 
             }
         });
@@ -169,8 +178,9 @@ public class ReportDetailActivity extends AppCompatActivity {
                 }
 
                 alreadyFixed.setEnabled(false);
-
-                report.setStatus(Status.EN_REPARACION);
+                supportReport.setEnabled(false);
+                report.setStatus(Status.EN_REVISION);
+                report.setSolucionado(report.getSolucionado() + 1);
 
                 Runnable r = new Runnable() {
                     @Override
@@ -179,7 +189,7 @@ public class ReportDetailActivity extends AppCompatActivity {
                         Intent i = new Intent();
                         Log.d("Enviando id", ((Long)report.getId()).toString());
                         i.putExtra("reportId",report.getId());
-                        i.setAction("com.dam.asfaltame.EN_REPARACION");
+                        i.setAction("com.dam.asfaltame.EN_REVISION");
                         sendBroadcast(i);
                     }
                 };
@@ -213,7 +223,7 @@ public class ReportDetailActivity extends AppCompatActivity {
                         markerIconId = R.drawable.ic_tapa_hundida;
                 }
                 break;
-            case EN_REPARACION:
+            case EN_REVISION:
                 markerIconId = R.drawable.ic_reparacion;
                 break;
             case REPARADO:

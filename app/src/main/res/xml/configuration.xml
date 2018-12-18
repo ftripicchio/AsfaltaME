@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <SeekBarPreference
+        android:key="nearDistance"
+        android:title="Máxima distancia a los reclamos cercanos (km)"
+        android:summary="Cuando desee ver sólo los reclamos cercanos, se mostrarán los incluídos dentro de este rango"
+        android:max="5"
+        android:defaultValue="1" />
+
+</PreferenceScreen>

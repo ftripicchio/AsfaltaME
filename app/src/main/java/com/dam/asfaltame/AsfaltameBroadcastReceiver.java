@@ -42,15 +42,18 @@ public class AsfaltameBroadcastReceiver extends BroadcastReceiver {
                                     "Tu reclamo ubicado en " + r.getAddress() + " fue solucionado."
                             ))
                             .setContentIntent(reportDetailPendingIntent)
+                            .setAutoCancel(true)
                             .build();
-                } else if (intent.getAction() == "com.dam.asfaltame.EN_REPARACION"){
+                } else if (intent.getAction() == "com.dam.asfaltame.EN_REVISION"){
                     notification = new NotificationCompat.Builder(context,"CANAL01")
                             .setSmallIcon(R.drawable.ic_reparacion)
-                            .setContentTitle("TU RECLAMO ESTA EN REPARACION")
+                            .setContentTitle("TU RECLAMO ESTA EN REVISION")
                             .setStyle(new NotificationCompat.BigTextStyle().bigText(
-                                    "Tu reclamo ubicado en " + r.getAddress() + " está siendo reparado."
+                                    "Recibimos múltiples reportes infromando la reparación de tu reclamo ubicado en "
+                                            + r.getAddress() + ". Estamos verificando la reparación"
                             ))
                             .setContentIntent(reportDetailPendingIntent)
+                            .setAutoCancel(true)
                             .build();
                 }
                 NotificationManagerCompat notificationManager = NotificationManagerCompat.from(context);

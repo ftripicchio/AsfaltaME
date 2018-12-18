@@ -165,6 +165,9 @@ public class NewReportActivity extends AppCompatActivity {
         newReport.setDescription(description.getText().toString());
         newReport.setAddress(address);
         newReport.setPictures(imagePaths.stream().collect(Collectors.joining(",")));
+        newReport.setPropietario(MainActivity.getActiveUser());
+        newReport.setApoyos(0);
+        newReport.setSolucionado(0);
 
         Runnable r1 = new Runnable() {
             @Override

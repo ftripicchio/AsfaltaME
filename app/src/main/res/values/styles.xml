@@ -13,4 +13,8 @@
         <item name="trackTint">@color/mediumGrey</item>
     </style>
 
+    <style name="PreferencesTheme" parent="Theme.AppCompat">
+        <item name="android:background">@color/colorBackground</item>
+    </style>
+
 </resources>

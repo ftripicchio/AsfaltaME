@@ -40,7 +40,7 @@ public class ReportAdapter extends ArrayAdapter<Report> {
 
         holder.reportAddress.setText(report.getAddress());
 
-        if(report.getStatus() == Status.EN_REPARACION){
+        if(report.getStatus() == Status.EN_REVISION){
             holder.reportIcon.setImageResource(R.drawable.ic_reparacion);
         }else{
             switch (report.getReportType()){

@@ -34,11 +34,12 @@ import com.google.android.gms.maps.model.LatLngBounds;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.maps.android.clustering.Cluster;
 import com.google.maps.android.clustering.ClusterManager;
 
 import java.util.List;
 
-public class MapsActivity extends AppCompatActivity implements OnMapReadyCallback {
+public class MapsActivity extends AppCompatActivity implements OnMapReadyCallback, GoogleMap.OnMarkerClickListener {
 
     private GoogleMap mMap;
     private int mapType;
@@ -83,6 +84,7 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
     @SuppressLint("MissingPermission")
     private void manageMap(){
         mMap.setMyLocationEnabled(true);
+
         List<Report> reports;
         switch (mapType){
             case 1: //nuevo reclamo
@@ -107,6 +109,7 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
                 allReports(reports);
                 break;
             case 4: //reclamos cercanos
+                mMap.setOnMarkerClickListener(this);
                 reports = intent.getParcelableArrayListExtra("reports");
                 putMarkers(reports);
                 break;
@@ -139,6 +142,7 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
             Marker marker = mMap.addMarker(new MarkerOptions()
                     .position(new LatLng(r.getLatitud(), r.getLongitud()))
                     .icon(vectorToBitmap(markerIcon(r))));
+            marker.setTag(r);
             builder.include(marker.getPosition());
         }
         LatLngBounds bounds = builder.build();
@@ -151,11 +155,35 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
         mMap.setOnCameraIdleListener(mClusterManager);
         mMap.setOnMarkerClickListener(mClusterManager);
 
+        mClusterManager.setOnClusterItemClickListener(new ClusterManager.OnClusterItemClickListener<MapItem>() {
+            @Override
+            public boolean onClusterItemClick(MapItem mapItem) {
+                Report r = mapItem.getReport();
+                Intent i = new Intent(MapsActivity.this, ReportDetailActivity.class);
+                i.putExtra("report", r);
+                startActivity(i);
+                return true;
+            }
+        });
+
+        mClusterManager.setOnClusterClickListener(new ClusterManager.OnClusterClickListener<MapItem>() {
+            @Override
+            public boolean onClusterClick(Cluster<MapItem> cluster) {
+                LatLngBounds.Builder builder = LatLngBounds.builder();
+                for(MapItem item : cluster.getItems()){
+                    builder.include(item.getPosition());
+                }
+                LatLngBounds bounds = builder.build();
+                mMap.animateCamera(CameraUpdateFactory.newLatLngBounds(bounds, 100));
+                return true;
+            }
+        });
+
         final MapClusterRenderer renderer = new MapClusterRenderer(this, mMap, mClusterManager);
         mClusterManager.setRenderer(renderer);
 
         for (Report r : reports){
-            mClusterManager.addItem(new MapItem(r.getLatitud(), r.getLongitud(), markerIcon(r)));
+            mClusterManager.addItem(new MapItem(r, markerIcon(r)));
         }
         mClusterManager.cluster();
 
@@ -182,7 +210,7 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
                         markerIconId = R.drawable.ic_tapa_hundida_rojo;
                 }
                 break;
-            case EN_REPARACION:
+            case EN_REVISION:
                 markerIconId = R.drawable.ic_reparacion_rojo;
                 break;
             case REPARADO:
@@ -200,6 +228,15 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
         vectorDrawable.setBounds(0, 0, canvas.getWidth(), canvas.getHeight());
         vectorDrawable.draw(canvas);
         return BitmapDescriptorFactory.fromBitmap(bitmap);
+    }
+
+    @Override
+    public boolean onMarkerClick(final Marker marker){
+        Report r = (Report) marker.getTag();
+        Intent i = new Intent(MapsActivity.this, ReportDetailActivity.class);
+        i.putExtra("report", r);
+        startActivity(i);
+        return true;
     }
 
     @Override

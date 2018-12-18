@@ -17,7 +17,7 @@
 
     <meta-data
         android:name="com.google.firebase.messaging.default_notification_channel_id"
-        android:value="CANAL01"/>
+        android:value="CANAL01" />
 
     <application
         android:allowBackup="true"
@@ -26,9 +26,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.Light.NoActionBar">
-        <activity android:name=".Activities.MainActivity">
 
-        </activity>
+        <activity android:name=".Activities.MainActivity"/>
         <activity android:name=".Activities.LoginRegisterActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -48,6 +47,8 @@
             android:name=".ImageSourceDialog"
             android:label="@string/dialogTitle"
             android:theme="@android:style/Theme.Material.Light.Dialog.Alert" />
+        <activity android:name=".Activities.ImageViewActivity" />
+        <activity android:name=".Activities.ConfigurationActivity" />
 
         <meta-data
             android:name="com.google.android.geo.API_KEY"
@@ -67,23 +68,22 @@
                 android:resource="@xml/file_paths" />
         </provider>
 
-        <activity android:name=".Activities.ImageViewActivity"/>
-
         <receiver
             android:name=".AsfaltameBroadcastReceiver"
             android:enabled="true"
             android:exported="true">
             <intent-filter>
-                <action android:name="com.dam.asfaltame.REPARADO"/>
-                <action android:name="com.dam.asfaltame.EN_REPARACION"/>
+                <action android:name="com.dam.asfaltame.REPARADO" />
+                <action android:name="com.dam.asfaltame.EN_REVISION" />
             </intent-filter>
         </receiver>
+
         <service
             android:name=".AsfaltameFirebaseInstanceIdService"
             android:enabled="true"
             android:exported="true">
             <intent-filter>
-                <action android:name="com.google.firebase.INSTANCE_ID_EVENT"/>
+                <action android:name="com.google.firebase.INSTANCE_ID_EVENT" />
             </intent-filter>
         </service>
         <service
@@ -91,11 +91,9 @@
             android:enabled="true"
             android:exported="true">
             <intent-filter>
-                <action android:name="com.google.firebase.MESSAGING_EVENT"/>
+                <action android:name="com.google.firebase.MESSAGING_EVENT" />
             </intent-filter>
         </service>
     </application>
-
-
 
 </manifest>
